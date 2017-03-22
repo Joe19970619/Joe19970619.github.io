@@ -87,21 +87,21 @@
 
 
 
-<meta name="description" content="前言这次也是一个适合JavaScript初学者的小练手，用JavaScript的基本知识去写一个轮播图，其实轮播图有很多方法去实现，像用一些框架，Bootstrap之类的，或者CSS3都可以轻松做出漂亮的轮播图，这次去用JavaScript实现，主要是为了锻炼自己使用Js的能力，代码非常简单，我会先放出HTML和CSS部分，最后详细讲解Js部分，还是那句话，重要的是思路，希望Js的初学者可以跟着">
+<meta name="description" content="JavaScript写个轮播效果这次也是一个适合JavaScript初学者的小练手，用JavaScript的基本知识去写一个轮播图，其实轮播图有很多方法去实现，像用一些框架，Bootstrap之类的，或者CSS3都可以轻松做出漂亮的轮播图，这次去用JavaScript实现，主要是为了锻炼自己使用Js的能力，代码非常简单，我会先放出HTML和CSS部分，最后详细讲解Js部分，还是那句话，重要的是思">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用原生JavaScript写个简单的轮播效果">
 <meta property="og:url" content="Joe19970619.github.io/2017/03/21/用原生JavaScript写个简易轮播效果/index.html">
 <meta property="og:site_name" content="Joe19970619的私人小站">
-<meta property="og:description" content="前言这次也是一个适合JavaScript初学者的小练手，用JavaScript的基本知识去写一个轮播图，其实轮播图有很多方法去实现，像用一些框架，Bootstrap之类的，或者CSS3都可以轻松做出漂亮的轮播图，这次去用JavaScript实现，主要是为了锻炼自己使用Js的能力，代码非常简单，我会先放出HTML和CSS部分，最后详细讲解Js部分，还是那句话，重要的是思路，希望Js的初学者可以跟着">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-ea142ec0708f4d68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:description" content="JavaScript写个轮播效果这次也是一个适合JavaScript初学者的小练手，用JavaScript的基本知识去写一个轮播图，其实轮播图有很多方法去实现，像用一些框架，Bootstrap之类的，或者CSS3都可以轻松做出漂亮的轮播图，这次去用JavaScript实现，主要是为了锻炼自己使用Js的能力，代码非常简单，我会先放出HTML和CSS部分，最后详细讲解Js部分，还是那句话，重要的是思">
+<meta property="og:image" content="http://img95.699pic.com/photo/00000/4223.jpg_wh300.jpg">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-176df9b3c1bef8f9.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-da54f56c6270c100.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-12bce848d17652a9.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-03-22T04:32:14.906Z">
+<meta property="og:updated_time" content="2017-03-22T11:47:43.554Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用原生JavaScript写个简单的轮播效果">
-<meta name="twitter:description" content="前言这次也是一个适合JavaScript初学者的小练手，用JavaScript的基本知识去写一个轮播图，其实轮播图有很多方法去实现，像用一些框架，Bootstrap之类的，或者CSS3都可以轻松做出漂亮的轮播图，这次去用JavaScript实现，主要是为了锻炼自己使用Js的能力，代码非常简单，我会先放出HTML和CSS部分，最后详细讲解Js部分，还是那句话，重要的是思路，希望Js的初学者可以跟着">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2768522-ea142ec0708f4d68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:description" content="JavaScript写个轮播效果这次也是一个适合JavaScript初学者的小练手，用JavaScript的基本知识去写一个轮播图，其实轮播图有很多方法去实现，像用一些框架，Bootstrap之类的，或者CSS3都可以轻松做出漂亮的轮播图，这次去用JavaScript实现，主要是为了锻炼自己使用Js的能力，代码非常简单，我会先放出HTML和CSS部分，最后详细讲解Js部分，还是那句话，重要的是思">
+<meta name="twitter:image" content="http://img95.699pic.com/photo/00000/4223.jpg_wh300.jpg">
 
 
 
@@ -373,8 +373,8 @@
       
 
       
-        <p><img src="http://upload-images.jianshu.io/upload_images/2768522-ea142ec0708f4d68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="轮播图的基本样式"></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这次也是一个适合<strong>JavaScript初学者</strong>的小练手，用JavaScript的基本知识去写一个轮播图，其实轮播图有很多方法去实现，像用一些框架，Bootstrap之类的，或者CSS3都可以轻松做出漂亮的轮播图，这次去用JavaScript实现，主要是为了锻炼自己使用Js的能力，代码非常简单，我会先放出HTML和CSS部分，最后详细讲解Js部分，还是那句话，重要的是思路，希望Js的初学者可以跟着我动手敲一敲，绝对对自己的能力有提升！<strong>完整代码也放在GitHub上了，链接在最后。</strong></p>
+        <p><img src="http://img95.699pic.com/photo/00000/4223.jpg_wh300.jpg" alt="轮播图的基本样式"></p>
+<h1 id="JavaScript写个轮播效果"><a href="#JavaScript写个轮播效果" class="headerlink" title="JavaScript写个轮播效果"></a>JavaScript写个轮播效果</h1><p>这次也是一个适合<strong>JavaScript初学者</strong>的小练手，用JavaScript的基本知识去写一个轮播图，其实轮播图有很多方法去实现，像用一些框架，Bootstrap之类的，或者CSS3都可以轻松做出漂亮的轮播图，这次去用JavaScript实现，主要是为了锻炼自己使用Js的能力，代码非常简单，我会先放出HTML和CSS部分，最后详细讲解Js部分，还是那句话，重要的是思路，希望Js的初学者可以跟着我动手敲一敲，绝对对自己的能力有提升！<strong>完整代码也放在GitHub上了，链接在最后。</strong></p>
 <a id="more"></a>
 <p><img src="http://upload-images.jianshu.io/upload_images/2768522-176df9b3c1bef8f9.gif?imageMogr2/auto-orient/strip" alt="效果演示：卡顿是因为GIF图片压缩了，损失了帧数"></p>
 <h4 id="HTML代码部分"><a href="#HTML代码部分" class="headerlink" title="HTML代码部分"></a>HTML代码部分</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"> &lt;div class="main_div"&gt;</div><div class="line">   &lt;div class="arrows"&gt;</div><div class="line">         &lt;span title="1" class="arrow"&gt;&lt;&lt;/span&gt;</div><div class="line">         &lt;span title="0" class="arrow" style="float: right"&gt;&gt;&lt;/span&gt;</div><div class="line">   &lt;/div&gt;</div><div class="line"></div><div class="line">   &lt;ul class="ul_img"&gt;</div><div class="line">         &lt;li class="li_img"&gt;![](images/摄图网-水珠在竹叶上.jpg)&lt;/li&gt;</div><div class="line">         &lt;li class="li_img"&gt;![](images/摄图网-在海边的人.jpg)&lt;/li&gt;</div><div class="line">         &lt;li class="li_img"&gt;![](images/摄图网-清凉的荷叶.jpg)&lt;/li&gt;</div><div class="line">         &lt;li class="li_img"&gt;![](images/摄图网-绵延不绝的山岭.jpg)&lt;/li&gt;</div><div class="line">   &lt;/ul&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;div style="margin-left: 600px"&gt;</div><div class="line">         &lt;div class="div_btn"&gt;&lt;/div&gt;</div><div class="line">         &lt;div class="div_btn"&gt;&lt;/div&gt;</div><div class="line">         &lt;div class="div_btn"&gt;&lt;/div&gt;</div><div class="line">         &lt;div class="div_btn"&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
@@ -596,7 +596,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML代码部分"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">HTML代码部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS代码部分"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">CSS代码部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript部分"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">JavaScript部分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路详解"><span class="nav-number">1.0.1.</span> <span class="nav-text">思路详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一个功能"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">第一个功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二个功能"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">第二个功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三个功能"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">第三个功能</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript写个轮播效果"><span class="nav-number">1.</span> <span class="nav-text">JavaScript写个轮播效果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML代码部分"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">HTML代码部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS代码部分"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">CSS代码部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript部分"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">JavaScript部分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路详解"><span class="nav-number">1.0.1.</span> <span class="nav-text">思路详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一个功能"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">第一个功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二个功能"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">第二个功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三个功能"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">第三个功能</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
