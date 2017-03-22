@@ -1,0 +1,781 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言这个小练手旨在帮助刚上手学习JavaScript的同学练习最基本的Js知识，大神勿喷哈，由于这个是非常简易的计算器，可以完成的功能有加减乘除和AC（清屏），DEL（退格）等基本运算，所以代码也不复杂，我会先放出代码，然后再讲解我的思路，非常简单，只要你按照我的思路走，15分钟不到我保证你也可以敲出同样的代码，当然主要还是希望可以为入门的同学提供一种解决问题的思路，各位看完后可以自己动手敲一遍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用原生JavaScript写个简易计算器">
+<meta property="og:url" content="Joe19970619.github.io/2017/03/21/用原生JavaScript写个简易计算器/index.html">
+<meta property="og:site_name" content="Joe19970619的私人小站">
+<meta property="og:description" content="前言这个小练手旨在帮助刚上手学习JavaScript的同学练习最基本的Js知识，大神勿喷哈，由于这个是非常简易的计算器，可以完成的功能有加减乘除和AC（清屏），DEL（退格）等基本运算，所以代码也不复杂，我会先放出代码，然后再讲解我的思路，非常简单，只要你按照我的思路走，15分钟不到我保证你也可以敲出同样的代码，当然主要还是希望可以为入门的同学提供一种解决问题的思路，各位看完后可以自己动手敲一遍">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-1f284f6c8449ba64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-ac4cafd1c7d4e06b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-da54f56c6270c100.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-03-22T04:36:42.902Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用原生JavaScript写个简易计算器">
+<meta name="twitter:description" content="前言这个小练手旨在帮助刚上手学习JavaScript的同学练习最基本的Js知识，大神勿喷哈，由于这个是非常简易的计算器，可以完成的功能有加减乘除和AC（清屏），DEL（退格）等基本运算，所以代码也不复杂，我会先放出代码，然后再讲解我的思路，非常简单，只要你按照我的思路走，15分钟不到我保证你也可以敲出同样的代码，当然主要还是希望可以为入门的同学提供一种解决问题的思路，各位看完后可以自己动手敲一遍">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2768522-1f284f6c8449ba64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"links_title":"友情链接","links_layout":"block","links":null,"Title":"https://github.com/Joe19970619/Joe19970619.github.io"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'Joe19970619',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="Joe19970619.github.io/2017/03/21/用原生JavaScript写个简易计算器/"/>
+
+
+
+
+
+  <title> 用原生JavaScript写个简易计算器 | Joe19970619的私人小站 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joe19970619的私人小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱嘎的前端发烧友</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="Joe19970619.github.io/2017/03/21/用原生JavaScript写个简易计算器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe19970619的私人小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                用原生JavaScript写个简易计算器
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-21T18:15:18+08:00">
+                2017-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript小练手/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript小练手</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/2768522-1f284f6c8449ba64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="完成的基本样式"></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这个小练手旨在帮助刚<strong>上手学习JavaScript的同学</strong>练习最基本的Js知识，大神勿喷哈，由于这个是非常简易的计算器，可以完成的功能有加减乘除和AC（清屏），DEL（退格）等基本运算，所以代码也不复杂，<strong>我会先放出代码，然后再讲解我的思路</strong>，非常简单，只要你按照我的思路走，15分钟不到我保证你也可以敲出同样的代码，当然主要还是希望可以为入门的同学提供一种解决问题的思路，各位看完后可以自己动手敲一遍哈。</p>
+<a id="more"></a>
+<h4 id="HTML代码部分"><a href="#HTML代码部分" class="headerlink" title="HTML代码部分"></a>HTML代码部分</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"> &lt;table&gt;</div><div class="line">      &lt;tr&gt;</div><div class="line">          &lt;td colspan="4"&gt;&lt;input class="txt" type="text" disabled/&gt;&lt;/td&gt;</div><div class="line">      &lt;/tr&gt;</div><div class="line">      &lt;tr&gt;</div><div class="line">          &lt;td colspan="2"&gt;&lt;input class="btn_click" type="button" value="AC"/&gt;&lt;/td&gt;</div><div class="line">          &lt;td colspan="2"&gt;&lt;input class="btn_click"  type="button" value="DEL"/&gt;&lt;/td&gt;</div><div class="line">      &lt;/tr&gt;</div><div class="line">      &lt;tr&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="7"/&gt;&lt;/td&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="8"/&gt;&lt;/td&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="9"/&gt;&lt;/td&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="*"/&gt;&lt;/td&gt;</div><div class="line"></div><div class="line">      &lt;/tr&gt;</div><div class="line">      &lt;tr&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="4"/&gt;&lt;/td&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="5"/&gt;&lt;/td&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="6"/&gt;&lt;/td&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="/"/&gt;&lt;/td&gt;</div><div class="line"></div><div class="line">      &lt;/tr&gt;</div><div class="line">      &lt;tr&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="1"/&gt;&lt;/td&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="2"/&gt;&lt;/td&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="3"/&gt;&lt;/td&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="-"/&gt;&lt;/td&gt;</div><div class="line"></div><div class="line">      &lt;/tr&gt;</div><div class="line">      &lt;tr&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="0"/&gt;&lt;/td&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="."/&gt;&lt;/td&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="+"/&gt;&lt;/td&gt;</div><div class="line">          &lt;td&gt;&lt;input class="btn" type="button" value="="/&gt;&lt;/td&gt;</div><div class="line"></div><div class="line">      &lt;/tr&gt;</div><div class="line"></div><div class="line">&lt;/table&gt;</div></pre></td></tr></table></figure>
+<p>HTML这部分非常简单，没什么多说的，整个框架我利用<table>搭建的，需要注意的是，由于计算器屏幕不可输入，我设置为了disabled。</table></p>
+<h4 id="CSS代码部分"><a href="#CSS代码部分" class="headerlink" title="CSS代码部分"></a>CSS代码部分</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">        table&#123;</div><div class="line">            border-collapse: collapse;</div><div class="line">            margin: auto auto;</div><div class="line">        &#125;</div><div class="line">        td&#123;</div><div class="line">            <span class="attr">width</span>: <span class="number">150</span>px;</div><div class="line">            line-height: <span class="number">70</span>px;</div><div class="line">        &#125;</div><div class="line">        .btn&#123;</div><div class="line">            <span class="attr">width</span>: <span class="number">150</span>px;</div><div class="line">            line-height: <span class="number">70</span>px;</div><div class="line">            font-size: x-large;</div><div class="line">        &#125;</div><div class="line">        .btn_click&#123;</div><div class="line">            <span class="attr">width</span>: <span class="number">302</span>px;</div><div class="line">            line-height: <span class="number">70</span>px;</div><div class="line">            font-size: x-large;</div><div class="line">        &#125;</div><div class="line">        .txt&#123;</div><div class="line">            <span class="attr">width</span>: <span class="number">600</span>px;</div><div class="line">            line-height: <span class="number">100</span>px;</div><div class="line">            font-size: x-large;text-align: right;</div><div class="line">        &#125;</div><div class="line">    &lt;<span class="regexp">/style&gt;</span></div></pre></td></tr></table></figure>
+<p>CSS也是简单设定了一下宽高，我是在火狐浏览器上运行的，由于我没使用百分比来设置宽高，在其他浏览器上样式会发生一定程度上的改变，不过不影响功能就是了。</p>
+<h4 id="JavaScript部分"><a href="#JavaScript部分" class="headerlink" title="JavaScript部分"></a>JavaScript部分</h4><p><strong>请先不要直接看这部分代码</strong>，先看我的思路讲解再看这部分，你绝对可以轻松理解<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    <span class="comment">/*在网页加载时  给按钮添加点击事件*/</span></div><div class="line">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">//定义数组  来接收用户按的数字和计算符号</span></div><div class="line">        <span class="keyword">var</span> way_res = [];</div><div class="line">        <span class="comment">//获取按钮对象</span></div><div class="line">        <span class="keyword">var</span> btn_txt = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"btn"</span>);</div><div class="line">        <span class="comment">//获取屏幕元素</span></div><div class="line">        <span class="keyword">var</span> txt = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"txt"</span>)[<span class="number">0</span>];</div><div class="line">        <span class="comment">//获取清空按钮和退格按钮</span></div><div class="line">        <span class="keyword">var</span> btn_way = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"btn_click"</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; btn_way.length; i++) &#123;</div><div class="line">            btn_way[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="comment">//判断按钮</span></div><div class="line">                <span class="keyword">if</span> (<span class="keyword">this</span>.value == <span class="string">"AC"</span>) &#123;</div><div class="line">                    way_res = [];</div><div class="line">                    txt.value = <span class="string">""</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="comment">/* substr() 截断字符串 1.从那个位置开始   2.截取多少长度*/</span></div><div class="line">                    txt.value = txt.value.substr(<span class="number">0</span>, txt.value.length - <span class="number">1</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//给btn_txt  数组对象添加事件</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; btn_txt.length; i++) &#123;</div><div class="line">            btn_txt[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="comment">/* this 指代的是当前事件的执行对象*/</span></div><div class="line">                <span class="comment">/*按完键将值传给屏幕*/</span></div><div class="line">                <span class="comment">/*判断是否为数字*/</span></div><div class="line">                <span class="keyword">if</span> (txt.value == <span class="string">""</span> &amp;&amp; <span class="keyword">this</span>.value == <span class="string">"."</span>) &#123;</div><div class="line">                    txt.value = <span class="string">"0."</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="keyword">if</span> (!<span class="built_in">isNaN</span>(<span class="keyword">this</span>.value) || <span class="keyword">this</span>.value == <span class="string">"."</span>) &#123;</div><div class="line">                        <span class="comment">/*用户输入的是数字或者点的情况*/</span></div><div class="line">                        <span class="comment">/*indexOf() 用来查找字符  如果有返回当前位置  如果没有返回-1*/</span></div><div class="line">                        <span class="keyword">if</span> (txt.value.indexOf(<span class="string">"."</span>) != <span class="number">-1</span>) &#123;</div><div class="line">                            <span class="comment">/*有点存在的情况*/</span></div><div class="line">                            <span class="keyword">if</span> (<span class="keyword">this</span>.value != <span class="string">"."</span>) &#123;</div><div class="line">                                <span class="comment">/*当前按得不是点，进行拼接*/</span></div><div class="line">                                txt.value += <span class="keyword">this</span>.value;</div><div class="line">                            &#125;</div><div class="line">                        &#125;</div><div class="line">                        <span class="keyword">else</span> &#123;</div><div class="line">                            <span class="comment">/*没点存在直接拼接*/</span></div><div class="line">                            txt.value += <span class="keyword">this</span>.value;</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">else</span> &#123;</div><div class="line">                        <span class="comment">/*是符号的情况*/</span></div><div class="line">                        <span class="comment">//先存值  在清屏</span></div><div class="line">                        <span class="keyword">if</span> (<span class="keyword">this</span>.value != <span class="string">"="</span>) &#123;</div><div class="line">                            <span class="comment">/*是符号但不为等号的情况*/</span></div><div class="line">                            way_res[way_res.length] = txt.value;</div><div class="line">                            <span class="comment">//存符号</span></div><div class="line">                            way_res[way_res.length] = <span class="keyword">this</span>.value;</div><div class="line">                            <span class="comment">//清屏</span></div><div class="line">                            txt.value = <span class="string">""</span>;</div><div class="line">                        &#125;</div><div class="line">                        <span class="keyword">else</span> &#123;</div><div class="line">                            <span class="comment">/*是等号的情况*/</span></div><div class="line">                            way_res[way_res.length] = txt.value;</div><div class="line">                            <span class="comment">//eval()方法   专门用来计算表达式的值</span></div><div class="line">                            txt.value = <span class="built_in">eval</span>(way_res.join(<span class="string">""</span>));</div><div class="line">                            <span class="comment">//计算完成之后将数组清空</span></div><div class="line">                            way_res = [];</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="思路讲解"><a href="#思路讲解" class="headerlink" title="思路讲解"></a>思路讲解</h3><p>请先不要看上面的JS代码，接下来请试着跟着我的思路走，完成这个计算器的功能，我是分成<strong>三个部分</strong>来解决的，<strong>第一部分</strong>是将除了AC，DEL这两个键之外的按键值获取到屏幕上，<strong>第二部分</strong>是计算屏幕上的表达式的值，<strong>第三部分</strong>是添加AC（清屏），DEL（退格）功能，检查BUG。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2768522-ac4cafd1c7d4e06b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<ul>
+<li><h5 id="第一部分：获取值到屏幕上"><a href="#第一部分：获取值到屏幕上" class="headerlink" title="第一部分：获取值到屏幕上"></a>第一部分：获取值到屏幕上</h5></li>
+</ul>
+<p>我认为解决简单的JS问题大体都可以分三步：</p>
+<ul>
+<li>1.获取你想操作的元素；</li>
+<li>2.保存你想操作的元素；</li>
+<li>3.对元素进行（遍历）操作；</li>
+</ul>
+<p>我的第一步目的是将除了AC，DEL这两个键之外的按键值获取到屏幕上，那么我首先得<strong>获取</strong>按钮元素以及屏幕元素并将它们<strong>保存</strong>在btn_txt和txt变量里：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取按钮对象</span></div><div class="line"><span class="keyword">var</span> btn_txt = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"btn"</span>);</div><div class="line"><span class="comment">//获取屏幕元素</span></div><div class="line"><span class="keyword">var</span> txt = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"txt"</span>)[<span class="number">0</span>];</div></pre></td></tr></table></figure></p>
+<p>获取并保存了想操作的元素，接下来就对他们添加操作：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//给btn_txt  数组对象添加onclick事件</span></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; btn_txt.length; i++) &#123;</div><div class="line">      btn_txt[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2768522-da54f56c6270c100.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>在进行操作的之前请等一下，我们思考一下，btn_txt数组里存放着0,1,2,3,4,5,6,7,8,9，” . “，” + “，” - “，” * “，” \ “，” = “等一系列东西，我们当然要对数字和计算符号进行分开操作，所以我们用If……else……来判断一下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> <span class="keyword">if</span> (!<span class="built_in">isNaN</span>(<span class="keyword">this</span>.value) || <span class="keyword">this</span>.value == <span class="string">"."</span>) &#123;</div><div class="line">            <span class="comment">/*用户输入的是数字或者点的情况*/</span></div><div class="line">           <span class="comment">/* this 指代的是当前事件的执行对象*/</span></div><div class="line">&#125;</div><div class="line"> <span class="keyword">else</span>&#123;</div><div class="line">           <span class="comment">/*用户输入的是符号的情况*/</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>OK，我们接下来先考虑<strong>用户输入的是数字或者点的情况</strong>，首先数字可以连续输入到屏幕里，但是小数点不应该能连续输入到屏幕里，小数点应该只有一个才对，所以我们应该先加一个判断条件：屏幕里是否有小数点存在？如果屏幕里已经有小数点存在，那么我只允许你再输入数字，否则屏幕值不会接收，即是如下代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"> <span class="keyword">if</span> (!<span class="built_in">isNaN</span>(<span class="keyword">this</span>.value) || <span class="keyword">this</span>.value == <span class="string">"."</span>) &#123;</div><div class="line">         <span class="comment">/*用户输入的是数字或者点的情况*/</span></div><div class="line">         <span class="comment">/* this 指代的是当前事件的执行对象*/</span></div><div class="line"></div><div class="line">         <span class="comment">/*有点存在的情况*/</span></div><div class="line">      <span class="keyword">if</span> (txt.value.indexOf(<span class="string">"."</span>) != <span class="number">-1</span>) &#123;</div><div class="line">      <span class="comment">/*indexOf() 用来查找字符  如果有 返回当前位置  如果没有 返回-1*/</span></div><div class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.value != <span class="string">"."</span>) &#123;</div><div class="line">            <span class="comment">/*当前按得不是点，进行拼接*/</span></div><div class="line">            txt.value += <span class="keyword">this</span>.value;</div><div class="line">            <span class="comment">/*这里的txt.value += this.value;意思是</span></div><div class="line">            将当前用户所按的数字添加到屏幕上去*/</div><div class="line">           &#125;</div><div class="line">   &#125;</div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">           <span class="comment">/*没点存在直接拼接*/</span></div><div class="line">                  txt.value += <span class="keyword">this</span>.value;</div><div class="line">           &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line"><span class="keyword">else</span>&#123;</div><div class="line">           <span class="comment">/*用户输入的是符号的情况接下来再考虑*/</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>好了，用户输入的是数字或者点的情况已经考虑结束了，现在<strong>考虑用户输入的是运算符号的情况</strong>！这种情况也分两部分，一种是用户按了等号，一种是按了除等号之外的其他加减乘除运算符号，因为等号比较特殊一点，按了就直接应该得出结果了，所以要区用if……else……分开。我这样的思路你可以理解吧！</p>
+<p>还有一个事情我们要考虑的是，我希望在我按下加减乘除运算符号时可以清屏，这样我就可以继续键入下一数字了（举例：我按下数字“5”，再按下运算符“ + ”，按下瞬间屏幕清屏，然后我再键入数字“3”，最后按下“ = ”，最后得出结果“2”），但是清屏我并不想让我的数据丢失，所以此时我先新建一个数组来保存这些数据（这里的“数据”指数字和运算符，也叫“表达式”），然后再清屏！具体代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">var</span> way_res = [];</div><div class="line"><span class="comment">/*先自定义一个数组  来接收用户按的数字和计算符号</span></div><div class="line">注意这里定义要在开头定义，而不是在函数内部*/</div><div class="line"></div><div class="line"><span class="keyword">if</span> (!<span class="built_in">isNaN</span>(<span class="keyword">this</span>.value) || <span class="keyword">this</span>.value == <span class="string">"."</span>) &#123;</div><div class="line">         <span class="comment">/*用户输入的是数字或者点的情况*/</span></div><div class="line">        <span class="comment">/*上面已经讨论过了，这里我省点地方*/</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">else</span>&#123;</div><div class="line">    <span class="comment">/*用户输入的是符号的情况*/</span></div><div class="line">    <span class="comment">//先存值  在清屏</span></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.value != <span class="string">"="</span>) &#123;</div><div class="line">       <span class="comment">/*是符号但不为等号的情况*/</span></div><div class="line">       way_res[way_res.length] = txt.value;</div><div class="line">        <span class="comment">//存符号</span></div><div class="line">       way_res[way_res.length] = <span class="keyword">this</span>.value;</div><div class="line">        <span class="comment">//清屏</span></div><div class="line">       txt.value = <span class="string">""</span>;</div><div class="line">   &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">      <span class="comment">/*为等号的情况下面讨论*/</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li><h5 id="第二部分：计算屏幕上的表达式的值"><a href="#第二部分：计算屏幕上的表达式的值" class="headerlink" title="第二部分：计算屏幕上的表达式的值"></a>第二部分：计算屏幕上的表达式的值</h5></li>
+</ul>
+<p>好了下面我们讨论用户按下等号键的情况，这种比较简单，直接对表达式（表达式就是我们之前输入的数字与符号组合）进行计算就可以啦，需要注意的是计算完成之后要把保存表达式的数组way_res清空，因为本次运算完满结束了，如果不清空里面的数据会影响下一次正常计算；<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">else</span> &#123;</div><div class="line">       <span class="comment">/*为等号的情况即是计算屏幕上表达式的值*/</span></div><div class="line"></div><div class="line">       <span class="comment">//先将屏幕上所有值保存到数组里</span></div><div class="line">       way_res[way_res.length] = txt.value;</div><div class="line">       <span class="comment">//eval()方法   专门用来计算表达式的值</span></div><div class="line">       <span class="comment">//join()方法   将数组的每位拼接成字符串</span></div><div class="line">       txt.value = <span class="built_in">eval</span>(way_res.join(<span class="string">""</span>));</div><div class="line">       <span class="comment">//计算完成之后将数组清空</span></div><div class="line">       way_res = [];</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li><h5 id="第三部分：添加AC，DEL功能，检查BUG"><a href="#第三部分：添加AC，DEL功能，检查BUG" class="headerlink" title="第三部分：添加AC，DEL功能，检查BUG"></a>第三部分：添加AC，DEL功能，检查BUG</h5></li>
+</ul>
+<p>首先，获取清空按钮和退格按钮，然后把它们保存在btn_way变量下；<br>然后就遍历进行添加功能，这里同样需要一个if……else……语句来判断用户按的是AC按钮还是DEL按钮<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> btn_way = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"btn_click"</span>);</div><div class="line"><span class="comment">//获取清空按钮和退格按钮</span></div><div class="line"> <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; btn_way.length; i++) &#123;</div><div class="line">     btn_way[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">     <span class="comment">//判断按钮</span></div><div class="line">     <span class="keyword">if</span> (<span class="keyword">this</span>.value == <span class="string">"AC"</span>) &#123;</div><div class="line">     <span class="comment">//如果是AC按钮，那么清空屏幕和数组里的一切值</span></div><div class="line">         way_res = [];</div><div class="line">         txt.value = <span class="string">""</span>;</div><div class="line">    &#125;</div><div class="line">     <span class="keyword">else</span> &#123;</div><div class="line">     <span class="comment">//不是AC，那必然是DEL，我们把屏幕的最后一位抹去再重新赋给屏幕</span></div><div class="line"></div><div class="line">     <span class="comment">/* substr(参数1，参数2) 截断字符串</span></div><div class="line">     参数1.从那个位置开始   参数2.截取多少长度*/</div><div class="line">         txt.value = txt.value.substr(<span class="number">0</span>, txt.value.length - <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>到这里为止，所有功能基本上全部添加完毕，然后我们进行调试，发现一个问题，就是当我们第一次按键就按小数点“ . ”时，这时用户的本意应为“ 0. ”,意即用户是想输入小数的，但是懒得按“0”，直接按了小数点，所以我们应该加一个判断条件来帮助用户，直接按小数点成为有意义的行为，代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (txt.value == <span class="string">""</span> &amp;&amp; <span class="keyword">this</span>.value == <span class="string">"."</span>) &#123;</div><div class="line">                    txt.value = <span class="string">"0."</span>;</div><div class="line">                &#125;</div></pre></td></tr></table></figure></p>
+<p>好了，最后再加上window.onload = function(){}，代码，到这里就全部结束了；大家有不理解的地方欢迎在评论里问我；</p>
+<h4 id="再放一遍JavaScript全代码"><a href="#再放一遍JavaScript全代码" class="headerlink" title="再放一遍JavaScript全代码"></a>再放一遍JavaScript全代码</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> way_res = [];</div><div class="line">        <span class="keyword">var</span> btn_txt = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"btn"</span>);</div><div class="line">        <span class="keyword">var</span> txt = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"txt"</span>)[<span class="number">0</span>];</div><div class="line">        <span class="keyword">var</span> btn_way = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"btn_click"</span>);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; btn_way.length; i++) &#123;</div><div class="line">            btn_way[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="keyword">if</span> (<span class="keyword">this</span>.value == <span class="string">"AC"</span>) &#123;</div><div class="line">                    way_res = [];</div><div class="line">                    txt.value = <span class="string">""</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> &#123;</div><div class="line">                    txt.value = txt.value.substr(<span class="number">0</span>, txt.value.length - <span class="number">1</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; btn_txt.length; i++) &#123;</div><div class="line">            btn_txt[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="keyword">if</span> (txt.value == <span class="string">""</span> &amp;&amp; <span class="keyword">this</span>.value == <span class="string">"."</span>) &#123;</div><div class="line">                    txt.value = <span class="string">"0."</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="keyword">if</span> (!<span class="built_in">isNaN</span>(<span class="keyword">this</span>.value) || <span class="keyword">this</span>.value == <span class="string">"."</span>) &#123;</div><div class="line">                        <span class="keyword">if</span> (txt.value.indexOf(<span class="string">"."</span>) != <span class="number">-1</span>) &#123;</div><div class="line">                            <span class="keyword">if</span> (<span class="keyword">this</span>.value != <span class="string">"."</span>) &#123;</div><div class="line">                                txt.value += <span class="keyword">this</span>.value;</div><div class="line">                            &#125;</div><div class="line">                        &#125;</div><div class="line">                        <span class="keyword">else</span> &#123;</div><div class="line">                            txt.value += <span class="keyword">this</span>.value;</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">else</span> &#123;</div><div class="line">                        <span class="keyword">if</span> (<span class="keyword">this</span>.value != <span class="string">"="</span>) &#123;</div><div class="line">                            way_res[way_res.length] = txt.value;</div><div class="line">                            way_res[way_res.length] = <span class="keyword">this</span>.value;</div><div class="line">                            txt.value = <span class="string">""</span>;</div><div class="line">                        &#125;</div><div class="line">                        <span class="keyword">else</span> &#123;</div><div class="line">                            way_res[way_res.length] = txt.value;</div><div class="line">                            txt.value = <span class="built_in">eval</span>(way_res.join(<span class="string">""</span>));</div><div class="line">                            way_res = [];</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/21/用原生JavaScript写个简易轮播效果/" rel="next" title="用原生JavaScript写个简单的轮播效果">
+                <i class="fa fa-chevron-left"></i> 用原生JavaScript写个简单的轮播效果
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Joe" />
+          <p class="site-author-name" itemprop="name">Joe</p>
+           
+              <p class="site-description motion-element" itemprop="description">这是一个准前端工程师的私人博客，我会在这里分享我的学习总结，希望您可以常来看看</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML代码部分"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">HTML代码部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS代码部分"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">CSS代码部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript部分"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">JavaScript部分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路讲解"><span class="nav-number">1.0.1.</span> <span class="nav-text">思路讲解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一部分：获取值到屏幕上"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">第一部分：获取值到屏幕上</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二部分：计算屏幕上的表达式的值"><span class="nav-number">1.0.1.0.2.</span> <span class="nav-text">第二部分：计算屏幕上的表达式的值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三部分：添加AC，DEL功能，检查BUG"><span class="nav-number">1.0.1.0.3.</span> <span class="nav-text">第三部分：添加AC，DEL功能，检查BUG</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#再放一遍JavaScript全代码"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">再放一遍JavaScript全代码</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joe</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">本站访客数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
