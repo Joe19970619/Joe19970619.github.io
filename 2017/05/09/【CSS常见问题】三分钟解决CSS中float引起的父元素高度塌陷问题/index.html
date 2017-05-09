@@ -1,0 +1,920 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="HTML&CSS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言相信很多同学在网页布局过程中都用过float浮动布局，float可以让我们很方便的去布局，但是同时也带来了很多的问题，虽然现在很多人都推荐用Flex布局来替代浮动布局（不了解Flex可以在这里看这里 阮一峰的网络日志），但是IE11以下和一些低级别版本的浏览器对Flex的支持不太好，所以我们用好浮动布局还是很有必要的。这篇文章主要解决的是float的所引起的父容器高度塌陷问题，相信很多人都遇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="完美解决CSS中float引起的父元素高度塌陷问题">
+<meta property="og:url" content="Joe19970619.github.io/2017/05/09/【CSS常见问题】三分钟解决CSS中float引起的父元素高度塌陷问题/index.html">
+<meta property="og:site_name" content="Joe19970619的私人小站">
+<meta property="og:description" content="前言相信很多同学在网页布局过程中都用过float浮动布局，float可以让我们很方便的去布局，但是同时也带来了很多的问题，虽然现在很多人都推荐用Flex布局来替代浮动布局（不了解Flex可以在这里看这里 阮一峰的网络日志），但是IE11以下和一些低级别版本的浏览器对Flex的支持不太好，所以我们用好浮动布局还是很有必要的。这篇文章主要解决的是float的所引起的父容器高度塌陷问题，相信很多人都遇">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-df5aea2f71fe0037.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-2158a81597bd7e7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-44ef5df1809e000f.png?
+imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-8310cfee6f5559a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-05-09T12:14:37.820Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="完美解决CSS中float引起的父元素高度塌陷问题">
+<meta name="twitter:description" content="前言相信很多同学在网页布局过程中都用过float浮动布局，float可以让我们很方便的去布局，但是同时也带来了很多的问题，虽然现在很多人都推荐用Flex布局来替代浮动布局（不了解Flex可以在这里看这里 阮一峰的网络日志），但是IE11以下和一些低级别版本的浏览器对Flex的支持不太好，所以我们用好浮动布局还是很有必要的。这篇文章主要解决的是float的所引起的父容器高度塌陷问题，相信很多人都遇">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2768522-df5aea2f71fe0037.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'Joe19970619',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'ZGYQUYNDJD',
+      apiKey: '844ab5b11de835d7fc9adca39d5bb4b2',
+      indexName: 'Search_Name',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键字进行搜索","hits_empty":"找不到关于“ ${query} ”的文章","hits_stats":"共找到 ${hits} 篇文章，花了 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="Joe19970619.github.io/2017/05/09/【CSS常见问题】三分钟解决CSS中float引起的父元素高度塌陷问题/"/>
+
+
+
+
+
+  <title> 完美解决CSS中float引起的父元素高度塌陷问题 | Joe19970619的私人小站 </title>
+  <style>
+    .forkme{
+  		display: none;
+  	}
+    @media (min-width: 768px) {
+  	.forkme{
+  		display: inline;
+  	}
+    }
+    </style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+      <div class="forkme">
+       <a href="https://github.com/you"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/c6625ac1f3ee0a12250227cf83ce904423abf351/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png"></a>
+      </div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joe19970619的私人小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爱嘎的前端发烧友</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="Joe19970619.github.io/2017/05/09/【CSS常见问题】三分钟解决CSS中float引起的父元素高度塌陷问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe19970619的私人小站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                完美解决CSS中float引起的父元素高度塌陷问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T20:07:11+08:00">
+                2017-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端须知问题/" itemprop="url" rel="index">
+                    <span itemprop="name">前端须知问题</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/2768522-df5aea2f71fe0037.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=" CSS "></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>相信很多同学在网页布局过程中都用过float浮动布局，float可以让我们很方便的去布局，但是同时也带来了很多的问题，虽然现在很多人都推荐用Flex布局来替代浮动布局（不了解Flex可以在这里看这里 <a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">阮一峰的网络日志</a>），但是IE11以下和一些低级别版本的浏览器对Flex的支持不太好，所以我们用好浮动布局还是很有必要的。这篇文章主要解决的是float的所引起的父容器高度塌陷问题，相信很多人都遇到过使用浮动时发现父容器没有撑开，以下我会给出几种解决方法，让大家不会在这个问题上再出错。</p>
+<a id="more"></a>
+<h5 id="首先，我们先看一个简单的例子，看看什么是父元素高度塌陷"><a href="#首先，我们先看一个简单的例子，看看什么是父元素高度塌陷" class="headerlink" title="首先，我们先看一个简单的例子，看看什么是父元素高度塌陷"></a>首先，我们先看一个简单的例子，看看什么是父元素高度塌陷</h5><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">     .content&#123;</div><div class="line">         background-color: rgba(102, 102, 102, 0.35);</div><div class="line">     &#125;</div><div class="line">     h1,p&#123;</div><div class="line">         /*float:left;*/</div><div class="line">     &#125;</div><div class="line">     p&#123;</div><div class="line">         margin-top: 1rem;</div><div class="line">         font-size: 1rem;</div><div class="line">     &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>沉默的大多数<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>  我现在写的东西大体属于文学的范畴，所谓文学，在我看来就是：先把文章写好看了再说，别的就不用管他妈的。除了文学，</div><div class="line">        我想不到有什么地方可以接受我这些古怪想法。赖在文学上，可以给自己在圈子中找到一个立脚点。有这样一个立脚点，就可以攻击这个圈子，攻击整个阳的世界。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>几年前，我在美国读书。有个洋鬼子这样问我们：你们中国那个阴阳学说，怎么一切好的东西都属阳，一点不给阴剩下？当然，她这样发问，是因为她正是一个五体不全之阴人。但是这话也有些道理。话语权属于阳的一方，它当然不会说阴的一方任何好话。就是夫子也未能免俗，他把妇女和小人攻击了一通。这句话几千年来总被人引用，但我就没听到受攻击一方有任何回应。人们只是小心提防着不要做小人，</div><div class="line">        至于怎样不做妇人，这问题一直没有解决。就是到了现代，女变男的变性手术也是一个难题，而且也不宜推广——这世界上假男人太多，真男人就会找不到老婆。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/2768522-2158a81597bd7e7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这是上面代码的效果"></p>
+<p>我为<code>h1</code><code>p</code>设置了一个父元素<code>div</code>，为了方便看到父元素，我设置了一个背景色，好，到目前为止，我们的页面没有任何问题，当我们为<code>div</code>的子元素<code>h1</code><code>p</code>设置float的时候，<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> <span class="selector-tag">h1</span>,<span class="selector-tag">p</span>&#123;</div><div class="line">     <span class="attribute">float</span>:left;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>页面将出现如下问题：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2768522-44ef5df1809e000f.png?
+imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="父容器高度塌陷为零了"></p>
+<p>可以很明显的看到背景没有了，父容器的高度变为0px了，这是为什么呢？因为元素浮动之后，周围的元素会重新排列，按照姜维老师的话就是，浮动的元素就跟浮云一样，不会影响到我们地面上的人类（未浮动的元素），人类怎么排列和漂浮的云没有关系。<br>好了，现在浮动引起了问题，并且这种问题并不是我们想要的结果，所以我们现在要解决这种问题，让父元素表现一个正常的高度，我们现在提供五种方法去解决问题：</p>
+<ul>
+<li><h4 id="一，在父元素底部加一行代码"><a href="#一，在父元素底部加一行代码" class="headerlink" title="一，在父元素底部加一行代码"></a>一，在父元素底部加一行代码</h4></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>沉默的大多数<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>  我现在写的东西大体属于文学的范畴，所谓文学，在我看来就是：先把文章写好看了再说，别的就不用管他妈的。除了文学，</div><div class="line">        我想不到有什么地方可以接受我这些古怪想法。赖在文学上，可以给自己在圈子中找到一个立脚点。有这样一个立脚点，就可以攻击这个圈子，攻击整个阳的世界。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>几年前，我在美国读书。有个洋鬼子这样问我们：你们中国那个阴阳学说，怎么一切好的东西都属阳，一点不给阴剩下？当然，她这样发问，是因为她正是一个五体不全之阴人。但是这话也有些道理。话语权属于阳的一方，它当然不会说阴的一方任何好话。就是夫子也未能免俗，他把妇女和小人攻击了一通。这句话几千年来总被人引用，但我就没听到受攻击一方有任何回应。人们只是小心提防着不要做小人，</div><div class="line">        至于怎样不做妇人，这问题一直没有解决。就是到了现代，女变男的变性手术也是一个难题，而且也不宜推广——这世界上假男人太多，真男人就会找不到老婆。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"clear:both;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>我们在父元素底部增加了一行空的<code>div</code>标签，并且为其设置了样式<br><code>clear:both;</code>,以下是修改后的效果：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2768522-8310cfee6f5559a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="父元素又恢复高度了"><br>这种方法通俗易懂，也容易掌握。<br>但是缺点是添加了无意义的空标签，违背了结构表现分离，给后期维护带来了问题。</p>
+<ul>
+<li><h4 id="二，给父元素增加一行CSS"><a href="#二，给父元素增加一行CSS" class="headerlink" title="二，给父元素增加一行CSS"></a>二，给父元素增加一行CSS</h4></li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span><span class="selector-class">.content</span>&#123;</div><div class="line">      <span class="attribute">float</span>:left;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>这个意思就比较直白了，让父元素也一起浮动，父元素和子元素又一起排列了，所以父元素高度就可以恢复了，但是这很明显是一种将错就错的方法，父元素本来就不需要浮动，为了解决高度问题让父元素浮动又会引发其他问题。</p>
+<ul>
+<li><h4 id="三，利用BFC来给父元素增加CSS"><a href="#三，利用BFC来给父元素增加CSS" class="headerlink" title="三，利用BFC来给父元素增加CSS"></a>三，利用BFC来给父元素增加CSS</h4></li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span><span class="selector-class">.content</span>&#123;</div><div class="line">      <span class="attribute">overflow</span>:auto;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>上面只是一种做法，你还可以加<code>display:table-cell;</code>或<code>display:table-caption;</code>或<code>display:inline-block;</code>或<code>position:fixed;</code>或<code>position:absolute</code>等等，你要问我为什么它们可以清除浮动，其实这些都是触发了BFC（块级格式化上下文），具体的我不解释了，大家可以看看这篇文章<a href="http://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html" target="_blank" rel="external">BFC神器背后的原理</a></p>
+<ul>
+<li><h4 id="四，使用CSS中的after伪元素"><a href="#四，使用CSS中的after伪元素" class="headerlink" title="四，使用CSS中的after伪元素"></a>四，使用CSS中的after伪元素</h4></li>
+</ul>
+<p>给父元素div添加一个clearfix的class类,<code><div class="content clearfix"></div></code>,然后设置CSS<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span>&#123;</div><div class="line">      <span class="attribute">content</span>: <span class="string">"."</span>;</div><div class="line">      <span class="attribute">display</span>: block;</div><div class="line">      <span class="attribute">height</span>: <span class="number">0px</span>;</div><div class="line">      <span class="attribute">clear</span>: both;</div><div class="line">      <span class="attribute">visibility</span>: hidden;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>这种方法其实有点类似于第一种方法，不过这种方法是通过after伪元素来给父元素末尾添加一个看不见的<code>clear:both;</code>的块元素，来达到清除浮动的目的。其中<code> content: “.”;</code>是为了加一段内容，<code>display: block;</code>是为了让生成的元素以块级元素显示，占满剩余空间，<code>height: 0px;</code>是为了避免生成的内容避免原有布局的高度，  <code>  visibility: hidden;</code>是为了让生成的元素不可见。</p>
+<ul>
+<li><h4 id="五，更优雅的改进——尼古拉斯大师方法"><a href="#五，更优雅的改进——尼古拉斯大师方法" class="headerlink" title="五，更优雅的改进——尼古拉斯大师方法"></a>五，更优雅的改进——尼古拉斯大师方法</h4></li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span>,</div><div class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:before</span>&#123;</div><div class="line">      <span class="attribute">content</span>: <span class="string">" "</span>;</div><div class="line">      <span class="attribute">display</span>: table; </div><div class="line">&#125;  </div><div class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span>&#123;</div><div class="line">      <span class="attribute">clear</span>: both;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上述代码把display设置为table，可以创建一个匿名的表格单元，这个匿名的表格单元可以直接触发BFC，然后再直接设置<code>content: “ “;</code>，把内容设置为一个空格，这样就节省了不必要的代码。<br>那加before伪元素是为了什么呢？加上before对于清除浮动没有什么必要性，主要目的是防止浏览器顶部的空白崩溃，即是指此盒子的margin-top与上一个盒子的margin-bottom会发生折叠，（在同一个BFC中两个毗邻的块级盒子在垂直方向（和布局有关系）的margin会发生折叠）。</p>
+<h5 id="现在大多数人都会采用最后一种方式来清除浮动，如果你还没有使用，建议快点学会哦，或者可以推荐给你的朋友，一分钟就可以掌握哦！觉得有用不妨点个赞吧！"><a href="#现在大多数人都会采用最后一种方式来清除浮动，如果你还没有使用，建议快点学会哦，或者可以推荐给你的朋友，一分钟就可以掌握哦！觉得有用不妨点个赞吧！" class="headerlink" title="现在大多数人都会采用最后一种方式来清除浮动，如果你还没有使用，建议快点学会哦，或者可以推荐给你的朋友，一分钟就可以掌握哦！觉得有用不妨点个赞吧！"></a>现在大多数人都会采用最后一种方式来清除浮动，如果你还没有使用，建议快点学会哦，或者可以推荐给你的朋友，一分钟就可以掌握哦！觉得有用不妨点个赞吧！</h5><p>参考资料：姜维_Wayne-《所向披靡的响应式开发》</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Joe
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="Joe19970619.github.io/2017/05/09/【CSS常见问题】三分钟解决CSS中float引起的父元素高度塌陷问题/" title="完美解决CSS中float引起的父元素高度塌陷问题">Joe19970619.github.io/2017/05/09/【CSS常见问题】三分钟解决CSS中float引起的父元素高度塌陷问题/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTML-CSS/" rel="tag"># HTML&CSS</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/21/用原生JavaScript写个简易计算器/" rel="next" title="用原生JavaScript写个简易计算器">
+                <i class="fa fa-chevron-left"></i> 用原生JavaScript写个简易计算器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Joe" />
+          <p class="site-author-name" itemprop="name">Joe</p>
+           
+              <p class="site-description motion-element" itemprop="description">这是一个准前端工程师的私人博客，我会在这里分享我的学习总结，希望您可以常来看看</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Joe19970619" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5652797795/home?wvr=5#_loginLayer_1490241403100" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/58ca19ad570c3500588e75ed" target="_blank" title="掘金">
+                  
+                    <i class="fa fa-fw fa-quote-right"></i>
+                  
+                  掘金
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/u/409a2e303cd8" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-book"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.alloyteam.com/" title="AlloyTeam" target="_blank">AlloyTeam</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#首先，我们先看一个简单的例子，看看什么是父元素高度塌陷"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">首先，我们先看一个简单的例子，看看什么是父元素高度塌陷</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一，在父元素底部加一行代码"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">一，在父元素底部加一行代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二，给父元素增加一行CSS"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">二，给父元素增加一行CSS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三，利用BFC来给父元素增加CSS"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">三，利用BFC来给父元素增加CSS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四，使用CSS中的after伪元素"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">四，使用CSS中的after伪元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五，更优雅的改进——尼古拉斯大师方法"><span class="nav-number">1.0.0.5.</span> <span class="nav-text">五，更优雅的改进——尼古拉斯大师方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#现在大多数人都会采用最后一种方式来清除浮动，如果你还没有使用，建议快点学会哦，或者可以推荐给你的朋友，一分钟就可以掌握哦！觉得有用不妨点个赞吧！"><span class="nav-number">1.0.0.5.1.</span> <span class="nav-text">现在大多数人都会采用最后一种方式来清除浮动，如果你还没有使用，建议快点学会哦，或者可以推荐给你的朋友，一分钟就可以掌握哦！觉得有用不妨点个赞吧！</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joe</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">本站访客数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
