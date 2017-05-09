@@ -93,16 +93,16 @@
 <meta property="og:url" content="Joe19970619.github.io/2017/05/09/【CSS常见问题】三分钟解决CSS中float引起的父元素高度塌陷问题/index.html">
 <meta property="og:site_name" content="Joe19970619的私人小站">
 <meta property="og:description" content="完美解决float引起的父元素高度塌陷问题相信很多同学在网页布局过程中都用过float浮动布局，float可以让我们很方便的去布局，但是同时也带来了很多的问题，虽然现在很多人都推荐用Flex布局来替代浮动布局（不了解Flex可以在这里看这里 阮一峰的网络日志），但是IE11以下和一些低级别版本的浏览器对Flex的支持不太好，所以我们用好浮动布局还是很有必要的。这篇文章主要解决的是float的所引">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-7d7e1457ca05e0ce.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-f0e2eda20db3941f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-2158a81597bd7e7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-44ef5df1809e000f.png?
 imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2768522-8310cfee6f5559a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-05-09T12:27:42.309Z">
+<meta property="og:updated_time" content="2017-05-09T12:34:43.880Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="完美解决CSS中float引起的父元素高度塌陷问题">
 <meta name="twitter:description" content="完美解决float引起的父元素高度塌陷问题相信很多同学在网页布局过程中都用过float浮动布局，float可以让我们很方便的去布局，但是同时也带来了很多的问题，虽然现在很多人都推荐用Flex布局来替代浮动布局（不了解Flex可以在这里看这里 阮一峰的网络日志），但是IE11以下和一些低级别版本的浏览器对Flex的支持不太好，所以我们用好浮动布局还是很有必要的。这篇文章主要解决的是float的所引">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2768522-7d7e1457ca05e0ce.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2768522-f0e2eda20db3941f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -425,7 +425,7 @@ imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
       
 
       
-        <p><img src="http://upload-images.jianshu.io/upload_images/2768522-7d7e1457ca05e0ce.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+        <p><img src="http://upload-images.jianshu.io/upload_images/2768522-f0e2eda20db3941f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <h1 id="完美解决float引起的父元素高度塌陷问题"><a href="#完美解决float引起的父元素高度塌陷问题" class="headerlink" title="完美解决float引起的父元素高度塌陷问题"></a>完美解决float引起的父元素高度塌陷问题</h1><p>相信很多同学在网页布局过程中都用过float浮动布局，float可以让我们很方便的去布局，但是同时也带来了很多的问题，虽然现在很多人都推荐用Flex布局来替代浮动布局（不了解Flex可以在这里看这里 <a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">阮一峰的网络日志</a>），但是IE11以下和一些低级别版本的浏览器对Flex的支持不太好，所以我们用好浮动布局还是很有必要的。这篇文章主要解决的是float的所引起的父容器高度塌陷问题，相信很多人都遇到过使用浮动时发现父容器没有撑开，以下我会给出几种解决方法，让大家不会在这个问题上再出错。</p>
 <a id="more"></a>
 <h5 id="首先，我们先看一个简单的例子，看看什么是父元素高度塌陷"><a href="#首先，我们先看一个简单的例子，看看什么是父元素高度塌陷" class="headerlink" title="首先，我们先看一个简单的例子，看看什么是父元素高度塌陷"></a>首先，我们先看一个简单的例子，看看什么是父元素高度塌陷</h5><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">     .content&#123;</div><div class="line">         background-color: rgba(102, 102, 102, 0.35);</div><div class="line">     &#125;</div><div class="line">     h1,p&#123;</div><div class="line">         /*float:left;*/</div><div class="line">     &#125;</div><div class="line">     p&#123;</div><div class="line">         margin-top: 1rem;</div><div class="line">         font-size: 1rem;</div><div class="line">     &#125;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
@@ -520,8 +520,8 @@ imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="父容器高度塌陷�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/21/用原生JavaScript写个简易计算器/" rel="next" title="用原生JavaScript写个简易计算器">
-                <i class="fa fa-chevron-left"></i> 用原生JavaScript写个简易计算器
+              <a href="/2017/03/21/用原生JavaScript写个简易轮播效果/" rel="next" title="用原生JavaScript写个简单的轮播效果">
+                <i class="fa fa-chevron-left"></i> 用原生JavaScript写个简单的轮播效果
               </a>
             
           </div>
